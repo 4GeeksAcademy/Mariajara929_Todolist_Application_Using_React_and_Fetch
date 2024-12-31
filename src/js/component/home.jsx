@@ -19,6 +19,7 @@ const Home = () => {
 		})
 			.then(resp => {
 				console.log(resp.ok); // Will be true if the response is successful
+				if (!resp.ok) { throw new Error() }
 				console.log(resp.status); // The status code=200 or code=400 etc.
 				console.log(resp.text()); // Will try to return the exact result as a string
 				return resp.json(); // (returns promise) Will try to parse the result as JSON and return a promise that you can .then for results
@@ -26,6 +27,7 @@ const Home = () => {
 			.then(data => {
 				// Here is where your code should start after the fetch finishes
 				console.log(data); // This will print on the console the exact object received from the server
+				getToDoList()
 			})
 			.catch(error => {
 				// Error handling
@@ -67,7 +69,6 @@ const Home = () => {
 					createUser()
 				}
 				console.log(resp.status); // The status code=200 or code=400 etc.
-				console.log(resp.text()); // Will try to return the exact result as a string
 				return resp.json(); // (returns promise) Will try to parse the result as JSON and return a promise that you can .then for results
 			})
 			.then(data => {
@@ -86,9 +87,9 @@ const Home = () => {
 	return (
 		<div className="container d-flex flex-column justify-content-center align-items-center">
 			<h1 className="alert text-secondary">To Do's</h1>
-			<ToDoInput toDoList={toDoList} setToDoList={setToDoList} />
+			<ToDoInput toDoList={toDoList} setToDoList={setToDoList} addToDo={addToDo} />
 			{toDoList.map((value, index) => <div className="alert alert-dark col-6 d-flex justify-content-between">
-				<p>	{value} </p>
+				<p>	{value.label} </p>
 				<span onClick={() => deleteToDo(index)} className="deleteButton btn btn-secondary"> X </span>
 			</div>)}
 		</div>
