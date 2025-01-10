@@ -90,6 +90,11 @@ const Home = () => {
 				<p>	{value.label} </p>
 				<span onClick={() => deleteToDo(value.id)} className="deleteButton btn btn-secondary"> X </span>
 			</div>)}
+			<div className="alert alert-info col-6 d-flex text-info justify-content-center">
+				{
+					toDoList.length == 0 ? "No Tasks Added. Enter a New Task." : toDoList.length == 1 ? "1 Task Left" : toDoList.length + " Tasks Left"
+				}
+			</div>
 		</div>
 	);
 };
